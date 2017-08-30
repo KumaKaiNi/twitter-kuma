@@ -3,7 +3,7 @@ defmodule TwitterKuma.Bot do
   require Logger
 
   def start_link(opts \\ []) do
-    Logger.debug "Starting bot!"
+    Logger.info "Starting bot!"
     GenServer.start_link(__MODULE__, :ok, opts)
   end
 
@@ -14,8 +14,8 @@ defmodule TwitterKuma.Bot do
 
   def handle_info(:update, state) do
     update = TwitterKuma.Markov.get_markov
-    Logger.debug "Sending update: #{update}"
     ExTwitter.update update
+    Logger.info "Sent update: #{update}"
 
     :erlang.send_after(3_600_000, self, :update)
     {:noreply, state}
