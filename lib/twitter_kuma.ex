@@ -1,18 +1,8 @@
 defmodule TwitterKuma do
-  @moduledoc """
-  Documentation for TwitterKuma.
-  """
+  def start(_type, _args) do
+    import Supervisor.Spec
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> TwitterKuma.hello
-      :world
-
-  """
-  def hello do
-    :world
+    children = [supervisor(TwitterKuma.Bot, [[name: TwitterKuma.Bot]])]
+    {:ok, _pid} = Supervisor.start_link(children, strategy: :one_for_one)
   end
 end
