@@ -1,5 +1,7 @@
 defmodule TwitterKuma.Markov do
-  def get_markov, do: gen_markov("/home/bowan/bots/_log/irc/twitch/rekyuus.log")
+  def get_markov do
+    gen_markov("/home/bowan/bots/_log/irc/twitch/rekyuus.log")
+  end
 
   defp gen_markov(input_file, word_count \\ 0, start_word \\ nil) do
     alias TwitterKuma.Markov.Dictionary
